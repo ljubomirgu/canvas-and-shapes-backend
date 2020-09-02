@@ -11,7 +11,7 @@ let Shape = new Schema({
       yBegin: {type: Number},
       rectangleWidth: {type: Number},
       rectangleHeight: {type: Number},
-      radius: {type: Number, required: false}} //, required: true, default:{xBegin: 100, yBegin: 100, rectangleWidth: 100, rectangleHeight: 100}
+      radius: {type: Number, required: false}} 
     }  
 })
 

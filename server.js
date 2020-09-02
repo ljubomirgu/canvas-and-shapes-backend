@@ -43,7 +43,9 @@ router.route('/shapes/add').post((req,res) => {
     let shape = new Shape(req.body);
     shape.save()
         .then(shape => {
-            res.status(200).json({shape: 'Added successfully'});
+            res.status(200).json(shape);
+            console.log(shape);
+            console.log(shape._id);
         })
         .catch(err => {
             res.status(400).send('Faild to  create new record');
