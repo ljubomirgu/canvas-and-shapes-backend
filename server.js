@@ -44,8 +44,6 @@ router.route('/shapes/add').post((req,res) => {
     shape.save()
         .then(shape => {
             res.status(200).json(shape);
-            console.log(shape);
-            console.log(shape._id);
         })
         .catch(err => {
             res.status(400).send('Faild to  create new record');
@@ -53,29 +51,30 @@ router.route('/shapes/add').post((req,res) => {
 });
 
 router.route('/shapes/update/:id').put((req, res) => {
+    console.log("I am on backend put!");
     Shape.findById(req.params.id, (err, shape) => {
         if(!shape){
             return next(new Error('Could not load document'));
-        }else{
-            // if(req.body.text != null){
-            shape.text = req.body.text;//}
-            // if(req.body.color != null){
-            shape.color = req.body.color;//}
-            // if(req.body.borderColor != null){
-            shape.borderColor = req.body.borderColor;//}
-            // if(req.body.position.xBegin != null){
-            // shape.position.xBegin = req.body.position.xBegin;}
-            // if(req.body.position.yBegin != null){
-            // shape.position.yBegin = req.body.position.yBegin;}
-            // if(req.body.position.rectangleWidth != null){
-            // shape.position.rectangleWidth = req.body.position.rectangleWidth;}
-            // if(req.body.position.rectangleHeight != null){
-            // shape.position.rectangleHeight = req.body.position.rectangleHeight;}
-            // if(req.body.position.radius != null){
-            // shape.position.radius = req.body.position.radius;}
+        }else{                  
+            if(req.body.text != null){
+            shape.text = req.body.text;}
+            if(req.body.color != null){
+            shape.color = req.body.color;}
+            if(req.body.borderColor != null){
+            shape.borderColor = req.body.borderColor;}
+            if(req.body.position.xBegin != null){
+            shape.position.xBegin = req.body.position.xBegin;}
+            if(req.body.position.yBegin != null){
+            shape.position.yBegin = req.body.position.yBegin;}
+            if(req.body.position.rectangleWidth != null){
+            shape.position.rectangleWidth = req.body.position.rectangleWidth;}
+            if(req.body.position.rectangleHeight != null){
+            shape.position.rectangleHeight = req.body.position.rectangleHeight;}
+            if(req.body.position.radius != null){
+            shape.position.radius = req.body.position.radius;}     
 
             shape.save().then(shape => {
-                res.json('Update done');
+                res.json(shape);
             }).catch(err => {
                 res.status(400).send('Update faild');
             });
