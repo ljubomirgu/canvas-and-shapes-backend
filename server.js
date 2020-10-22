@@ -9,7 +9,7 @@ const app = express();
 const router = express.Router();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json());  
 
 mongoose.connect('mongodb://localhost:27017/shapes');
 
@@ -51,11 +51,13 @@ router.route('/shapes/add').post((req,res) => {
 });
 
 router.route('/shapes/update/:id').put((req, res) => {
-    console.log("I am on backend put!");
+    console.log("Server put response: ", res);
     Shape.findById(req.params.id, (err, shape) => {
+        console.log("Server put: ",shape);
         if(!shape){
             return next(new Error('Could not load document'));
-        }else{                  
+        }else{ 
+            console.log("Server req.body : ", req.body);                 
             if(req.body.text != null){
             shape.text = req.body.text;}
             if(req.body.color != null){
@@ -63,22 +65,25 @@ router.route('/shapes/update/:id').put((req, res) => {
             if(req.body.borderColor != null){
             shape.borderColor = req.body.borderColor;}
             if(req.body.position.xBegin != null){
+                console.log("ovde")
             shape.position.xBegin = req.body.position.xBegin;}
             if(req.body.position.yBegin != null){
             shape.position.yBegin = req.body.position.yBegin;}
             if(req.body.position.rectangleWidth != null){
-            shape.position.rectangleWidth = req.body.position.rectangleWidth;}
-            if(req.body.position.rectangleHeight != null){
-            shape.position.rectangleHeight = req.body.position.rectangleHeight;}
+            shape.position.rectWidth = req.body.position.rectWidth;}
+            if(req.body.position.rectHeight != null){
+            shape.position.rectHeight = req.body.position.rectHeight;}
             if(req.body.position.radius != null){
             shape.position.radius = req.body.position.radius;}     
 
             shape.save().then(shape => {
+                console.log("Server put after save: ",shape)
                 res.json(shape);
             }).catch(err => {
                 res.status(400).send('Update faild');
             });
         }
+        console.log("ovde shape",shape)
     });
 });
 

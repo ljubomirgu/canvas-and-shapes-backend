@@ -9,8 +9,8 @@ let Shape = new Schema({
     position: { type:{
       xBegin:  {type: Number},
       yBegin: {type: Number},
-      rectangleWidth: {type: Number},
-      rectangleHeight: {type: Number},
+      rectWidth: {type: Number},
+      rectHeight: {type: Number},
       radius: {type: Number, required: false}} 
     }  
 })
